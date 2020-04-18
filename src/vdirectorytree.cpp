@@ -121,7 +121,11 @@ void VDirectoryTree::fillTreeItem(QTreeWidgetItem *p_item, VDirectory *p_directo
     static QIcon itemIcon = VIconUtils::treeViewIcon(":/resources/icons/dir_item.svg");
 
     int col = 0;
-    QString name = p_directory->getName();
+
+    int count = p_directory->collectFiles().count();
+    // int count = p_directory->getSubDirs().size();
+    int count2 = p_directory->getFiles().size();
+    QString name = p_directory->getName() + (count > 0 ? tr(" %1").arg(count) : "" );  
     p_item->setText(col, name);
     p_item->setToolTip(col, name);
     p_item->setData(col, Qt::UserRole, QVariant::fromValue(p_directory));
